@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AutoTrade Pro | Trading Simulator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                ₿
+            </div>
+
+            <div>
+                <h1>
+                    AutoTrade <span>Pro</span>
+                </h1>
+
+                <p>
+                    Algorithmic Trading Simulator
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <div class="market-status">
+
+                <span class="status-dot"></span>
+
+                Market Open
+
+            </div>
+
+
+            <button
+                id="themeBtn"
+                class="icon-btn"
+                title="Toggle Theme">
+
+                🌙
+
+            </button>
+
+
+            <button
+                id="resetBtn"
+                class="reset-btn">
+
+                ↻ Reset
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <!-- ================= STATS ================= -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    ₹
+                </div>
+
+                <div>
+
+                    <p>
+                        Available Balance
+                    </p>
+
+                    <h2 id="balance">
+                        ₹1,00,000.00
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    💼
+                </div>
+
+                <div>
+
+                    <p>
+                        Portfolio Value
+                    </p>
+
+                    <h2 id="portfolioValue">
+                        ₹1,00,000.00
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    ↗
+                </div>
+
+                <div>
+
+                    <p>
+                        Total Profit/Loss
+                    </p>
+
+                    <h2 id="totalProfit">
+                        ₹0.00
+                    </h2>
+
+                    <span id="profitPercentage">
+                        0.00%
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    📦
+                </div>
+
+                <div>
+
+                    <p>
+                        Holdings
+                    </p>
+
+                    <h2 id="holdings">
+                        0
+                    </h2>
+
+                    <span>
+                        Shares
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= TRADING SECTION ================= -->
+
+        <section class="trading-layout">
+
+
+            <!-- ================= MARKET PANEL ================= -->
+
+            <div class="panel market-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="section-label">
+                            SIMULATED MARKET
+                        </p>
+
+                        <h2>
+                            TECHCORP
+                        </h2>
+
+                        <span class="symbol">
+                            TCRP · NSE
+                        </span>
+
+                    </div>
+
+
+                    <div class="price-box">
+
+                        <h2 id="currentPrice">
+                            ₹1,000.00
+                        </h2>
+
+                        <span
+                            id="priceChange"
+                            class="positive">
+
+                            +0.00%
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CHART -->
+
+                <div class="chart-container">
+
+                    <canvas id="priceChart"></canvas>
+
+                </div>
+
+
+                <!-- MARKET INFO -->
+
+                <div class="market-info">
+
+
+                    <div>
+
+                        <span>
+                            24H High
+                        </span>
+
+                        <strong id="highPrice">
+                            ₹1,000.00
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            24H Low
+                        </span>
+
+                        <strong id="lowPrice">
+                            ₹1,000.00
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Volume
+                        </span>
+
+                        <strong id="volume">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Market Status
+                        </span>
+
+                        <strong class="market-open">
+                            LIVE
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= ORDER PANEL ================= -->
+
+            <div class="panel order-panel">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="section-label">
+                            ORDER PANEL
+                        </p>
+
+                        <h2>
+                            Trade
+                        </h2>
+
+                    </div>
+
+
+                    <span class="paper-badge">
+                        PAPER TRADING
+                    </span>
+
+                </div>
+
+
+
+                <!-- BUY SELL -->
+
+                <div class="trade-buttons">
+
+                    <button
+                        id="buyBtn"
+                        class="buy-btn">
+
+                        BUY
+
+                    </button>
+
+
+                    <button
+                        id="sellBtn"
+                        class="sell-btn">
+
+                        SELL
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- QUANTITY -->
+
+                <div class="form-group">
+
+                    <label for="quantity">
+                        Quantity
+                    </label>
+
+
+                    <div class="quantity-control">
+
+                        <button id="minusBtn">
+                            −
+                        </button>
+
+
+                        <input
+                            type="number"
+                            id="quantity"
+                            value="1"
+                            min="1"
+                        >
+
+
+                        <button id="plusBtn">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ORDER SUMMARY -->
+
+                <div class="order-summary">
+
+
+                    <div>
+
+                        <span>
+                            Current Price
+                        </span>
+
+                        <strong id="orderPrice">
+                            ₹1,000.00
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Order Value
+                        </span>
+
+                        <strong id="orderValue">
+                            ₹1,000.00
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- AUTO TRADING -->
+
+                <div class="auto-trading">
+
+
+                    <div>
+
+                        <strong>
+                            🤖 Auto Trading
+                        </strong>
+
+                        <p>
+                            Let the strategy trade automatically
+                        </p>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="autoTradeToggle"
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- STRATEGY -->
+
+                <div class="strategy-box">
+
+
+                    <div class="strategy-header">
+
+                        <span>
+                            Active Strategy
+                        </span>
+
+                        <strong>
+                            Moving Average
+                        </strong>
+
+                    </div>
+
+
+                    <div class="strategy-details">
+
+
+                        <div>
+
+                            <span>
+                                Short MA
+                            </span>
+
+                            <strong id="shortMA">
+                                ₹1,000.00
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Long MA
+                            </span>
+
+                            <strong id="longMA">
+                                ₹1,000.00
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="strategy-signal">
+
+                        <span>
+                            Current Signal
+                        </span>
+
+                        <strong id="signal">
+                            HOLD
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= PORTFOLIO ================= -->
+
+        <section class="panel portfolio-panel">
+
+
+            <div class="panel-header">
+
+
+                <div>
+
+                    <p class="section-label">
+                        YOUR INVESTMENT
+                    </p>
+
+                    <h2>
+                        Portfolio
+                    </h2>
+
+                </div>
+
+
+                <div class="portfolio-profit">
+
+                    <span>
+                        Unrealized P/L
+                    </span>
+
+                    <strong id="unrealizedPL">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="portfolio-grid">
+
+
+                <div class="portfolio-item">
+
+                    <span>
+                        Shares Owned
+                    </span>
+
+                    <strong id="portfolioShares">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="portfolio-item">
+
+                    <span>
+                        Average Buy Price
+                    </span>
+
+                    <strong id="averagePrice">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="portfolio-item">
+
+                    <span>
+                        Current Price
+                    </span>
+
+                    <strong id="portfolioCurrentPrice">
+                        ₹1,000.00
+                    </strong>
+
+                </div>
+
+
+                <div class="portfolio-item">
+
+                    <span>
+                        Investment
+                    </span>
+
+                    <strong id="investment">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= TRADE HISTORY ================= -->
+
+        <section class="panel history-panel">
+
+
+            <div class="panel-header">
+
+
+                <div>
+
+                    <p class="section-label">
+                        ACTIVITY
+                    </p>
+
+                    <h2>
+                        Trade History
+                    </h2>
+
+                </div>
+
+
+                <!-- NEW HISTORY ACTIONS -->
+
+                <div class="history-actions">
+
+
+                    <span id="tradeCount">
+                        0 Trades
+                    </span>
+
+
+                    <button
+                        id="clearHistoryBtn"
+                        class="clear-history-btn">
+
+                        🗑 Clear
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="table-wrapper">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Time
+                            </th>
+
+                            <th>
+                                Type
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Quantity
+                            </th>
+
+                            <th>
+                                Value
+                            </th>
+
+                            <th>
+                                P/L
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="tradeHistory">
+
+
+                        <tr class="empty-row">
+
+                            <td colspan="7">
+
+                                <div class="empty-state">
+
+                                    <div>
+                                        📊
+                                    </div>
+
+                                    <p>
+                                        No trades yet
+                                    </p>
+
+                                    <span>
+                                        Start trading to see your activity here
+                                    </span>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= TOAST ================= -->
+
+    <div id="toast" class="toast">
+
+
+        <span id="toastIcon">
+            ✓
+        </span>
+
+
+        <div>
+
+            <strong id="toastTitle">
+                Success
+            </strong>
+
+            <p id="toastMessage">
+                Trade completed successfully.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            AutoTrade Pro · Paper Trading Simulator
+        </p>
+
+        <span>
+            This application uses simulated market data and does not execute real trades.
+        </span>
+
+    </footer>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
